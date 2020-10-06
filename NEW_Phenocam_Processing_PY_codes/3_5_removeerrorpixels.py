@@ -1,37 +1,36 @@
-import glob
-import os
-import shutil
-#import cv2
-import numpy as np
-from datetime import datetime
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-im = Image.open("/h/d2/m/au6787cn-s/EXTP40/EXTP40/pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1200.jpg")
-print (im)
+im = Image.open("SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg")
+#print (im.size)
+#im.show()
 
-#checkCount = 0
-#extraCheck = 50
-#error = True
-#width, height, r  # = Image.size()
-#irstPix #= get pixel value
-#while checkNumb < extraCheck or error == True:
-    # if getPixelValue(height, width-checkCount) == firstPix
-  #  else
- #   error == False
+checkCount = 0
+extraCheck = 50
+error = True
+firstPix = im.getpixel((im.width-1, im.height-1))
+while checkCount < extraCheck or error == True:
+  tempwidth = im.width - 1 - checkCount
+  tempheight = im.height - 1
+  temppix = (tempwidth, tempheight)
+  if im.getpixel(temppix) != firstPix: 
+    error == False
+  checkCount = +1
 
-#w = width
-#h = height
+w = im.width
+h = im.height
 
-#while error == True:
+while error == True:
     
- #   if(getpixValue == firstPix):
+    #if(getpixValue == firstPix):
         #thatPix = (255, 255, 255) #ändra till numpy.nan senare
-  #  else:
-   #     error = False
+    #else:
+        #error = False
 
     #if(w == 0):
-     #   w = width
-      #  h = height - 1
+       # w = width
+        #h = height - 1
     #else:
-     #   w = w - 1
+        #w = w - 1
 
