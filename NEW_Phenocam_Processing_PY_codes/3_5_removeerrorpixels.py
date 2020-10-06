@@ -32,9 +32,8 @@ while error is True: #if we know there are errors => start changing
   print ('second check')
   if im.getpixel((w, h - rowCount)) == firstPix: #if first pixel to the right is wrong we know the row needs to be fixed
     while colCount < (im.width - 1) or im.getpixel(w - colCount, h - rowCount) != firstPix: #make sure not out of bounds or remove correct photos
-      im[w - colCount, h-rowCount] = float(np.nan)
+      im[w - colCount, h-rowCount] = float(np.nan) #HERE IS THE PROBLEM
       colCount = colCount + 1
-      #thatPix = (255, 255, 255) #ändra till numpy.nan senare
   else:
     error = False
     
