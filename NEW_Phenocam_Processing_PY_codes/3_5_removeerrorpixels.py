@@ -1,8 +1,9 @@
+
 from PIL import Image
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-im = Image.open("SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg")
+im = Image.open("pictures\Asa\SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg")
 #print (im.size)
 
 checkCount = 0
