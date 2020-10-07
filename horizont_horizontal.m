@@ -11,8 +11,8 @@ I2 = I2/scalingFactor;
 sky = (I2>(mean(mean(I2))/0.8)); %markera ut det som äe himmel
 CC = bwconncomp(sky); %combinerar alla med samma nummer till en?
 numPixels = cellfun(@numel,CC.PixelIdxList); %applicerar en function på varje cell
-
-idx = numPixels<20000;
+ 
+idx = numPixels<20000; %going through all the bwconncomp
 for i=1:length(idx)
     if idx(i)
         sky(CC.PixelIdxList{i}) = 0; %sätter något till 0? Tar förmoldigen bort himmelen från beräkningen
@@ -23,11 +23,11 @@ sky(1200:length(sky(:,1,1)),:,:)=0; % take bottom third out of account %ingen an
 
 hedge = vision.EdgeDetector; %hitta kanter på saker och ting och markera dem som linjer
 hhoughtrans = vision.HoughTransform(pi/360,'ThetaRhoOutputPort', true); %hittar alla linjer?
-hfindmax = vision.LocalMaximaFinder(1,	'HoughMatrixInput', true); %hittar de platserna när edgen skiljer sig som mest (som mellan svart och vit)
+hfindmax = vision.LocalMaximaFinder(1,	'HoughMatrixInput', true); %hittar den längsta linjen
  hhoughlines = vision.HoughLines('SineComputation','Trigonometric function');
 
 
-%Hittar horisonten här?
+
 BW = step(hedge, double(sky)); %plottar någonting
 [ht, theta, rho] = step(hhoughtrans, BW); %delar in ploten i en matris
 idx = step(hfindmax, ht);

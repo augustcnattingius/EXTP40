@@ -6,8 +6,8 @@ import numpy as np
 from datetime import datetime
 from PIL import Image
 
-im = Image.open("/h/d2/m/au6787cn-s/EXTP40/EXTP40/pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1200.jpg")
-print (im)
+im = Image.open("pictures\Asa\SWE-ASA-NYB-FOR-P01_20170107_007_1200.jpg")
+im.show()
 
 #checkCount = 0
 #extraCheck = 50
