@@ -14,7 +14,7 @@ All thresholds are user defined.
 import glob
 import os
 import shutil
-import cv2
+from cv2 import cv2
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -61,7 +61,7 @@ cv2.polylines(img, np.int32([pts1]), 1, (0, 0, 255), 10)
 
 #Create a mask with 0 as background having same size like that of original image
 mask = np.zeros_like(img)
-    
+
 #Fill the polygon with white colour where we want to apply the mask
 cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
 
