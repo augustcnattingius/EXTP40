@@ -6,7 +6,7 @@ import os.path
 import numpy as np
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-im = Image.open(os.path.join(script_dir,"pictures\Asa\SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"))
+im = Image.open(os.path.join(script_dir,"/Users/magnus/Desktop/SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"))
 width, height = im.size
 
 checkCount = 0
