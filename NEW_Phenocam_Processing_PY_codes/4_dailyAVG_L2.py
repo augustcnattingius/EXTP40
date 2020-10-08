@@ -109,8 +109,36 @@ for subdir in os.listdir(baseDst):
     #cv2.cvtColor for converting image from BGR to RGB
     images = [cv2.cvtColor(cv2.imread(file), cv2.COLOR_BGR2RGB) for file in glob.glob(os.path.join(imgDir, '*.jpg'))]
 
+    for im in images:
+        checkCount = 0
+        extraCheck = 25
+        error = True
+        height = im.shape[0]
+        width = im.shape[1]
+        w = width - 1
+        h = height - 1
+        rowCount = 0
+        colCount = 0
+
+        while error is True and rowCount <= h: #if we know there are errors => start changing
+            firstPix = im[w, h-rowCount]
+            #check first if there actually are errors on that row
+            while checkCount < extraCheck:
+                tempwidth = width - 1 - checkCount
+                tempheight = height - 1
+                if im[tempwidth, tempheight] != firstPix: 
+                    error == False
+                checkCount = checkCount + 1
+
+            while error is True and (colCount <= w or im[w - colCount, h - rowCount] == firstPix): #something is odd here
+                im[w - colCount, h-rowCount] = np.nan
+                colCount = colCount + 1
+  
+            colCount = width - 1
+            rowCount = rowCount + 1
+
     #Compute element wise daily average
-    avgImg = np.mean(images, axis = 0)
+    avgImg = np.nanmean(images, axis = 0)
     
     #Converting float64 type ndarray to uint8
     intImage = np.around(avgImg).astype(np.uint8) #Round first and then convert to integer
