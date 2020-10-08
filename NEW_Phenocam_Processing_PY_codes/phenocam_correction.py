@@ -13,10 +13,12 @@
 import numpy as np
 from scipy.signal import fftconvolve
 from PIL import Image
+from cv2 import cv2
 
 def main():
-    template = Image.open("Röbäcksdalen_matching.png")
-    image = Image.open("NEW_Phenocam_Processing_PY_codes/pictures/Röbäcksdalen/SWE-RBD-RBD-AGR-P02_2019-05-24T1030.jpg")
+    template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen_matching.png"))
+    image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes/pictures/Röbäcksdalen/SWE-RBD-RBD-AGR-P02_2019-05-24T1030.jpg"))
+    print ("temp:",np.ndim(template),"image:",np.ndim(image))
     normxcorr2(template,image)
 
 
