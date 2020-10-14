@@ -41,3 +41,5 @@ while bigWhile is True and rowCount <= h: #if we know there are errors => start 
   colCount = 0
   rowCount = rowCount + 1
 
+print("done")
+
