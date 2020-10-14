@@ -20,7 +20,7 @@ def main():
     image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen\SWE-RBD-RBD-AGR-P02_2019-03-20T1000.jpg",mode='r'))
     print ("temp:",np.ndim(template), template.shape,"image:",np.ndim(image), image.shape)
     c = normxcorr2(template,image)
-    (cmax, imax) = c
+    (cmax, imax) = np.argmax(abs(c))
 
 
 def normxcorr2(template, image, mode="full"):
