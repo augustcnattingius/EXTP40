@@ -17,19 +17,25 @@ def main():
 #förslag: Ask for path as user input, call functions with path as parameter
 #main method calling all phenocam processings-functions in order
 
+    #made the individual classes into functions so that they could be called from this main-fuction.
+    #In order to import the functions I had to renamame the classes since they could not start with a number.
+
     #Enter the pathname of where the images are stored
     pathname = input("Enter path") 
 
-
+    #IndexError in imgRename, so had to change it for it to work for me, changes are documented in imgRename
     #if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         #imgRename_function(pathname)
 
-    if input("Do You Want To Continue with Removing Dark images? [y/n]") == "y":
-        removeDark_function(pathname)
+    # removeDark path to Dark folder was changed for it to work for me
+    #if input("Do You Want To Continue with Removing Dark images? [y/n]") == "y":
+        #removeDark_function(pathname)
 
-    if input("Do You Want To Continue with timeFilter? [y/n]") == "y":
-        timeFilter_function(pathname)
+    #path to 10TO14 was changed for it to work for me
+    #if input("Do You Want To Continue with timeFilter? [y/n]") == "y":
+        #timeFilter_function(pathname)
 
+     #path to Temp was changed for it to work for me. IndexError when splitting doy.
     if input("Do You Want To Continue with Removing Calculating daily averages? [y/n]") == "y":
         dailyAVG_L2_function(pathname)
 

@@ -31,8 +31,11 @@ def removeDark_function(pathname):
         except:
             pass
 
-    #Path definition for storing dark images       
-    dest_dark = thePath + '\\Dark'
+    #Path definition for storing dark images   
+    
+    # Changed from dest_dark = thePath +  '\\Dark' 
+    dest_dark = thePath + '/Dark'
+    
 
     #################################################################################################
 
