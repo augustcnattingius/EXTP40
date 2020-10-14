@@ -9,6 +9,9 @@ from cv2 import cv2
 script_dir = os.path.dirname(os.path.abspath(__file__))
 #img = Image.open(os.path.join(script_dir,"pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"))
 im = cv2.imread(os.path.join(script_dir,"pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"), 1)
+#convert to cv2 np.array ^ because that's what's used later, np.array should be able to have nan values
+#OBS note!!!  cv2 save the image in BGR and not RGB, so you have to convert, but a conversion is
+#done in stage 4 so I haven't done it here yet
 
 checkCount = 0
 extraCheck = 25
@@ -32,10 +35,11 @@ while bigWhile is True and rowCount <= h: #if we know there are errors => start 
       error = False
     checkCount = checkCount + 1
 
+  #If there are errors => replace that whole row with np.nan
   if error is True:
     print("supposed to set to nan")
-    im[(h-rowCount)] = np.NaN
-    if np.isnan(im).any():
+    im[(h-rowCount), :] = [np.nan, np.nan, np.nan] #tried with only np.nan with no difference
+    if np.isnan(im).any(): #never gets here
       print("sucess nan")
   
   colCount = 0
