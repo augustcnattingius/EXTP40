@@ -16,10 +16,11 @@ from PIL import Image
 from cv2 import cv2
 
 def main():
-    template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen_matching.jpg"))
-    image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen\SWE-RBD-RBD-AGR-P02_2019-04-17T1330.jpg"))
+    template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen_matching.jpg", mode='r'))
+    image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen\SWE-RBD-RBD-AGR-P02_2019-03-20T1000.jpg",mode='r'))
     print ("temp:",np.ndim(template), template.shape,"image:",np.ndim(image), image.shape)
-    normxcorr2(template,image).show()
+    c = normxcorr2(template,image)
+    (cmax, imax) = np.argmax(abs(c))
 
 
 def normxcorr2(template, image, mode="full"):
