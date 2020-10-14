@@ -66,11 +66,18 @@ def imgRename_function(pathname):
         splitted = oldimgName.split('_')
         yy = splitted[1].split('-')[0]
         mm = splitted[1].split('-')[1]
-        dd = splitted[1].split('-')[2]
-        hhmm = splitted[2].split('.')[0]
-        
+        dd1 = splitted[1].split('-')[2]
+        #added dd2 to split day, ex 20T1000.jpg to 20
+        dd2 = dd1.split('T')[0]
+        print(dd2)
+        #hmm was like this: splitted[2].split('-')[2], this gives IndexError?
+        hhmm1 = splitted[1].split('.')[0]
+        #added hhmm2 to split into hour and minute, ex 2019-03-20T1000 to 1000
+        hhmm2 = hhmm1.split('T')[1]
+        print(hhmm2)
         #Concatenating ddmmyy for calculating day of year
-        sdate = dd + '-' + mm + '-' + yy
+        #dd changed to dd2
+        sdate = dd2 + '-' + mm + '-' + yy
         
         #Converting date in string format to date format
         adate = datetime.datetime.strptime(sdate,"%d-%m-%Y")
@@ -80,15 +87,15 @@ def imgRename_function(pathname):
         
         if dayOfYear < 10:
             #Concatenating all variables to define the new file name for the images
-            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd + '_' + '00' + str(dayOfYear) + '_' + hhmm + '.jpg'
+            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd2 + '_' + '00' + str(dayOfYear) + '_' + hhmm2 + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
             
         elif dayOfYear >= 10 and dayOfYear < 100:
-            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd + '_' + '0' + str(dayOfYear) + '_' + hhmm + '.jpg'
+            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd2 + '_' + '0' + str(dayOfYear) + '_' + hhmm2 + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
             
         else:
-            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd + '_' + str(dayOfYear) + '_' + hhmm + '.jpg'
+            newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd2 + '_' + str(dayOfYear) + '_' + hhmm2 + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
         
         '''

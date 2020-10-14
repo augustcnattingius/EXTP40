@@ -48,7 +48,7 @@ def dailyAVG_L2_function(pathname):
             pass
 
     #Path definition for intermediate file storage    
-    baseDst = imgSrc + '\Temp'
+    baseDst = imgSrc + '/Temp'
 
     #################################################################################################
     #################################################################################################
@@ -62,17 +62,21 @@ def dailyAVG_L2_function(pathname):
         imgName = os.path.basename(img)
         
         #Day of Year information (DOY) extraction from image file name
-        dayOfYear = int(imgName.split('_')[2])
-        
+        #
+        dayOfYear = (imgName.split('_')[2])
+        print(dayOfYear)
+        dayOfYear2 = dayOfYear.split('.')[0]
+        dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
+        dayOfYear4 = int(dayOfYear3.split('T')[0]
         #Check if current DOY is in the list
-        if dayOfYear not in doy:
-            
+        if dayOfYear4 not in doy:
+           
             #Append the day of year in empty list DOY
-            doy.append(dayOfYear)
+            doy.append(dayOfYear4)
             
             #Make a new folder in the given path with the 'doy' as folder name
             thePath = baseDst
-            folders = [str(dayOfYear)]
+            folders = [str(dayOfYear4)]
             
             #Iterating the folders list to create each DOY as a new folder in given path
             for folder in folders:
