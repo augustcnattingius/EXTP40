@@ -37,7 +37,7 @@ def timeFilter_function(pathname):
             pass
 
     #Path definition for saving filtered images 
-    dest = imgSrc + '\\10TO14'
+    dest = imgSrc + '/10TO14'
 
     #################################################################################################
     #Filter out PhenoCam images within user defined time frame
