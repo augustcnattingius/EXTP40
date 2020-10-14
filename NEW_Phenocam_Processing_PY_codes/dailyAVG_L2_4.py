@@ -113,7 +113,7 @@ def dailyAVG_L2_function(pathname):
         images = [cv2.cvtColor(cv2.imread(file), cv2.COLOR_BGR2RGB) for file in glob.glob(os.path.join(imgDir, '*.jpg'))]
 
         #Compute element wise daily average
-        avgImg = np.mean(images, axis = 0)
+        avgImg = np.nanmean(images, axis = 0)
         
         #Converting float64 type ndarray to uint8
         intImage = np.around(avgImg).astype(np.uint8) #Round first and then convert to integer
