@@ -20,6 +20,7 @@ import datetime
 #Path Definition for source images
 #################################################################################################
 
+
 def imgRename_function(pathname):
     
 #Source images 
@@ -32,8 +33,13 @@ def imgRename_function(pathname):
     #Iterating through the .jpg files in source directory
     for img in sorted(glob.glob(os.path.join(srcImgdir, "*.jpg"))):
         
+        
         #Extracting image file name
         oldimgName = os.path.basename(img)
+        if "T" not in oldimgName:
+            print (oldimgName)
+            continue
+
         print(oldimgName)
         '''
         ##############################################################################################
@@ -279,12 +285,13 @@ def imgRename_function(pathname):
         
         #Splitting the image file name based on '_' character
         splitted = tRemoved.split('_')
-        
+
         #Extract the base name
         baseName = splitted[0]
         
         #Extract year, month, day, hour, minute information
         temp = splitted[1].split('-')
+        print ("splitted:",splitted,"temp:", temp)
         yymmdd = ''.join(temp) #Join all strings from 'temp' list
         hhmm = splitted[2].split('.')[0]
         

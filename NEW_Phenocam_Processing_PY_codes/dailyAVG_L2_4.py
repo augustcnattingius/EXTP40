@@ -112,7 +112,7 @@ def dailyAVG_L2_function(pathname):
         #Read all files in a directory as a numpy array
         #cv2.cvtColor for converting image from BGR to RGB
         images = [cv2.cvtColor(cv2.imread(file), cv2.COLOR_BGR2RGB) for file in glob.glob(os.path.join(imgDir, '*.jpg'))]
-        
+        print (images)
         #call the 3.5 here? Don't forget to make sure the files are in float because we need float to have nan
 
         #Compute element wise daily average

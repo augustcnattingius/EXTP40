@@ -65,9 +65,9 @@ def snowThreshold_function(pathname):
     #Fill the polygon with white colour where we want to apply the mask
 
     #changed from cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
-    #cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+    cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
 
-    cv2.fillPoly(mask, np.array([pts1], 'int32'), (255,255,255))
+    #cv2.fillPoly(mask, np.array([pts1], 'int32'), (255,255,255))
 
     #OpenCV represents image in reverse order BGR; so convert it to appear in RGB mode and plot it
     plt.rcParams['figure.figsize'] = (16,8)
@@ -97,7 +97,7 @@ def snowThreshold_function(pathname):
         
         #Extracting image file name
         imgName = os.path.basename(img)
-        
+        print (imgName)
         #Day of Year information (DOY) extraction from image file name
         dayOfYear = imgName.split('_')[2]
 
