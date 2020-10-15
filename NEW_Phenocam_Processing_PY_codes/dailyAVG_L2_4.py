@@ -67,7 +67,7 @@ def dailyAVG_L2_function(pathname):
         print(dayOfYear)
         dayOfYear2 = dayOfYear.split('.')[0]
         dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
-        dayOfYear4 = int(dayOfYear3.split('T')[0]
+        dayOfYear4 = int(dayOfYear3.split('T')[0])
         #Check if current DOY is in the list
         if dayOfYear4 not in doy:
            
