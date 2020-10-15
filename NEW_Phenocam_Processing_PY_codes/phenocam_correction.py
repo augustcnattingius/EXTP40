@@ -14,17 +14,30 @@ import numpy as np
 from scipy.signal import fftconvolve
 from PIL import Image
 from cv2 import cv2
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 def main():
     template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\\trunk_matching_part.jpg"))
     image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\\2012-07-10-1100.jpg"))
     print ("temp:",np.ndim(template), template.shape,"image:",np.ndim(image), image.shape)
+    temp_shape = [s for s in template.shape]
+    temp_shape.pop(2)
     c = normxcorr2(template,image)
-    c2 = np.argmax(abs(c))
-    print (c2)
+    absC = np.absolute(c)
+    imax = np.argmax(absC)
+    c_max = np.amax(absC)
+    shape = [c for c in c.shape]
+    shape.pop(2)
+    peak = ind2sub(shape, imax)
+    corr_offset = [peak[1] - temp_shape[0], peak[0] - temp_shape[1]]
+    x1 = corr_offset[0]
+    y1 = corr_offset[1]
+    print ("shape c:",shape,"xy:", (x1,y1), "shape matching:",temp_shape, "peak:",peak, "imax:",imax, "c_max:", c_max)
+    display(image, (x1,y1), temp_shape)
 
 
-def normxcorr2(template, image, mode="full"):
+def normxcorr2(template, image, mode="valid"):
     """
     Input arrays should be floating point numbers.
     :param template: N-D array, of template or filter you are using for cross-correlation.
@@ -65,6 +78,29 @@ def normxcorr2(template, image, mode="full"):
     out[np.where(np.logical_not(np.isfinite(out)))] = 0
     
     return out
+
+def ind2sub(array_shape, ind):
+    # Gives repeated indices, replicates matlabs ind2sub
+    rows = (ind.astype("int32") // array_shape[1])
+    cols = (ind.astype("int32") % array_shape[1])
+    return (rows, cols)
+def display(image, position, size):
+    im = np.array(image, dtype=np.uint8)
+
+    # Create figure and axes
+    fig,ax = plt.subplots(1)
+
+    # Display the image
+    ax.imshow(im)
+
+    # Create a Rectangle patch
+    rect = patches.Rectangle(position,size[0],size[1],linewidth=1,edgecolor='r',facecolor='none')
+
+    # Add the patch to the Axes
+    ax.add_patch(rect)
+
+    plt.show()
+
 
 if __name__ == '__main__':
     main()
