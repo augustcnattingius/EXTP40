@@ -62,17 +62,8 @@ def dailyAVG_L2_function(pathname):
         imgName = os.path.basename(img)
         
         #Day of Year information (DOY) extraction from image file name
-<<<<<<< HEAD
         #changed from dayofYear = imgName.split('_')[2])
         dayOfYear = imgName.split('_')[2]
-=======
-        #
-        dayOfYear = (imgName.split('_')[2])
-        print(dayOfYear)
-        dayOfYear2 = dayOfYear.split('.')[0]
-        dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
-        dayOfYear4 = int(dayOfYear3.split('T')[0])
->>>>>>> 74459a0d9e3fecd3526b38192241426eabd9c2d3
         #Check if current DOY is in the list
         
         if dayOfYear not in doy:
