@@ -25,8 +25,7 @@ def timeFilter_function(pathname):
     #################################################################################################
 
     #Path definition for source images
-    imgSrc = r'pathname'
-
+    imgSrc = pathname
     #Automatically creating folders in the directory to store filtered images
     #Try-except block is to pass overwrite directories if exists
     folders = ['10TO14']
@@ -44,6 +43,7 @@ def timeFilter_function(pathname):
     #################################################################################################
 
     #Iterating all images and saving it in a new folder
+    counter = 0
     for img in sorted(glob.glob(os.path.join(imgSrc, '*.jpg'))):
         
         #Extracting image file name
@@ -57,7 +57,7 @@ def timeFilter_function(pathname):
 
         #Condition to check the time of image acquisition for a given image
         if (hour >= 10) and (hour <= 14):
-            
+            counter = counter + 1
             #Copy the images to destination folder
             shutil.copy(img, dest)
 
@@ -73,5 +73,6 @@ def timeFilter_function(pathname):
     print ('\n')
     print ('Time elapsed: {}'.format(time_taken)) 
     print ('Images between user defined time thresholds are filtered successfully.')
+    print (str(counter) + ' Images filtered')
 
     #################################################################################################

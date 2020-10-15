@@ -18,7 +18,6 @@ def removeDark_function(pathname):
     
     #Define path of source images
     thePath = pathname
-    print (pathname)
     #################################################################################################
     #Automatic folder creation, path definition for copying dark images to a separate folder
     #################################################################################################
@@ -43,6 +42,7 @@ def removeDark_function(pathname):
 
     #Iterating all images
     #Change the path to folder storing images other than filtered
+    counter = 0
     for img in sorted(glob.glob(os.path.join(thePath, "*.jpg"))):
         
         #Extracting image file name
@@ -55,11 +55,12 @@ def removeDark_function(pathname):
     #Check to move all night images to its respective destination folder
     #################################################################################################        
         #All the images with file size less than 0.9mb are termed as dark images
+        
         if (fileSize <= 350.0):
             shutil.move(img, dest_dark) 
-        
+            counter = counter + 1
     #################################################################################################
-
+    print(str(counter) + ' Dark images removed')
     print ('Dark images are filtered out successfully in the defined path.')
 
     ################################################################################################# 

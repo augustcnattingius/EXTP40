@@ -20,7 +20,7 @@ import random
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-def snowThreshold_function():
+def snowThreshold_function(pathname):
     #################################################################################################
     #Get time now. This helps to compute total elapsed time for running the code.
     #################################################################################################
@@ -31,8 +31,7 @@ def snowThreshold_function():
     #################################################################################################
 
     #Folder path definition for original images
-    thePath = r'E:\Internship\2018'
-
+    thePath = pathname
     #Automatically creating folders in the directory to store snowy images 
     #Try-except block is to pass overwrite directories if exists
     folders = ['Snowy']
@@ -44,14 +43,14 @@ def snowThreshold_function():
 
     #Defining the path for saving filtered images
     #Always change the base path i.e. 'E:\Internship\snowTest\'
-    dest = thePath + '\Snowy'
+    dest = thePath + '/Snowy'
 
     #################################################################################################
     #Display Region of Interest (ROI) selection in the image  
     #################################################################################################
 
     #Random selection of one image from the image folder to show the extent of ROI
-    imgDir = thePath + '\\' + random.choice(os.listdir(thePath))
+    imgDir = thePath + '/' + random.choice(os.listdir(thePath))
 
     #Loading image from the specified file
     img = cv2.imread(imgDir)
@@ -64,7 +63,11 @@ def snowThreshold_function():
     mask = np.zeros_like(img)
 
     #Fill the polygon with white colour where we want to apply the mask
-    cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+
+    #changed from cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+    #cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+
+    cv2.fillPoly(mask, np.array([pts1], 'int32'), (255,255,255))
 
     #OpenCV represents image in reverse order BGR; so convert it to appear in RGB mode and plot it
     plt.rcParams['figure.figsize'] = (16,8)
@@ -86,6 +89,7 @@ def snowThreshold_function():
     #################################################################################################
 
     #Iterating through all the images to calculate total DN within given ROI
+    counter = 0
     for img in sorted(glob.glob(os.path.join(thePath, '*.jpg'))):
     
         #Reading image one by one
@@ -96,6 +100,14 @@ def snowThreshold_function():
         
         #Day of Year information (DOY) extraction from image file name
         dayOfYear = imgName.split('_')[2]
+
+        '''
+        dayOfYear = imgName.split('_')[1]
+        dayOfYear2 = dayOfYear.split('.')[0]
+        dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
+        dayOfYear4 = int(dayOfYear3.split('T')[0])
+        '''
+
         DOY.append(dayOfYear)
         
         #Apply the mask and extract the image data within mask only
@@ -118,6 +130,7 @@ def snowThreshold_function():
         #Snow surface presents higher reflectance in the blue wavelength range 
         snow = 80
         if (Bm >= snow) :
+            counter = counter + 1
             shutil.move(img, dest)
             
     #Plotting the mean DN values across all 3 channels (i.e. RGB)
@@ -144,5 +157,6 @@ def snowThreshold_function():
 
     #These line of codes will print out the total elapsed time
     print ('\n')
-    print ('Time elapsed: {}'.format(time_taken))  
+    print ('Time elapsed: {}'.format(time_taken)) 
+    print (str(counter) + ' Images filtered') 
     #################################################################################################   

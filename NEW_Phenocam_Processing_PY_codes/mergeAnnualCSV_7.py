@@ -12,10 +12,10 @@ import pandas as pd
 import glob
 import os
 
-def mergeAnnualCSV_function():
+def mergeAnnualCSV_function(pathname3):
     #################################################################################################
     #Folder path definition for .csv files
-    thePath = r'E:\Internship\Final\Abisko\L3\ROI1\all'
+    thePath = pathname3
 
     #List out all the .csv files in the defined path
     all_files = glob.glob(thePath + "/*.csv")
@@ -66,7 +66,7 @@ def mergeAnnualCSV_function():
     camNo = baseName.split('-')[-1]
 
     #Define folder path to save the merged dataframe
-    savePath = thePath + '\\' + 'SITES_' + camNo + '-' + 'GCC-RCC_' + stn + '_' + loc + '_' + startDate + '-' + endDate + '_' + 'L3_daily.csv'
+    savePath = thePath + '/' + 'SITES_' + camNo + '-' + 'GCC-RCC_' + stn + '_' + loc + '_' + startDate + '-' + endDate + '_' + 'L3_daily.csv'
 
     #Export the merged dataframe as a .csv file
     frame.to_csv(savePath, index = False)

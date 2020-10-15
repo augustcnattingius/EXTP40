@@ -34,6 +34,7 @@ def imgRename_function(pathname):
         
         #Extracting image file name
         oldimgName = os.path.basename(img)
+        print(oldimgName)
         '''
         ##############################################################################################
         #Renaming Asa Station .jpg files
@@ -56,7 +57,7 @@ def imgRename_function(pathname):
         ##############################################################################################
         ##############################################################################################
         '''
-
+        '''
         ##############################################################################################
         #Renaming Skogaryd .jpg files (SWE-SRC-CEN-FOR-P01, SWE-SRC-CEN-FOR-P02, SWE-SRC-CEN-FOR-P03)
         ##############################################################################################
@@ -66,18 +67,11 @@ def imgRename_function(pathname):
         splitted = oldimgName.split('_')
         yy = splitted[1].split('-')[0]
         mm = splitted[1].split('-')[1]
-        dd1 = splitted[1].split('-')[2]
-        #added dd2 to split day, ex 20T1000.jpg to 20
-        dd2 = dd1.split('T')[0]
-        print(dd2)
-        #hmm was like this: splitted[2].split('-')[2], this gives IndexError?
-        hhmm1 = splitted[1].split('.')[0]
-        #added hhmm2 to split into hour and minute, ex 2019-03-20T1000 to 1000
-        hhmm2 = hhmm1.split('T')[1]
-        print(hhmm2)
+        dd = splitted[1].split('-')[2]
+        hhmm = splitted[2].split('-')[2]
+
         #Concatenating ddmmyy for calculating day of year
-        #dd changed to dd2
-        sdate = dd2 + '-' + mm + '-' + yy
+        sdate = dd + '-' + mm + '-' + yy
         
         #Converting date in string format to date format
         adate = datetime.datetime.strptime(sdate,"%d-%m-%Y")
@@ -98,7 +92,7 @@ def imgRename_function(pathname):
             newimgName = 'SWE-SRC-CEN-FOR-P01' + '_' + yy + mm + dd2 + '_' + str(dayOfYear) + '_' + hhmm2 + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
         
-        '''
+        
         ##############################################################################################
         #Renaming Lonnstorp .jpg files (SWE-LON-SFA-AGR-P01, SWE-LON-SFA-AGR-P02, SWE-LON-SFA-AGR-P03)
         ##############################################################################################
@@ -274,7 +268,7 @@ def imgRename_function(pathname):
             newimgName = 'SWE-TRS-LAE-GRA-P01' + '_' + yy + mm + dd + '_' + str(dayOfYear) + '_' + hhmm + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
         '''
-        '''
+        
         ##############################################################################################
         #Renaming Robacksdalen station .jpg files
         ##############################################################################################
@@ -315,7 +309,7 @@ def imgRename_function(pathname):
         else:
             newimgName = baseName + '_' + yymmdd + '_' + str(dayOfYear) + '_' + hhmm + '.jpg'
             os.rename(os.path.join(srcImgdir, oldimgName), os.path.join(srcImgdir, newimgName))
-        '''
+        
         
     #################################################################################################
     #################################################################################################

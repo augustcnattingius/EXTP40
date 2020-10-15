@@ -23,7 +23,7 @@ import datetime
 from datetime import datetime as dt
 from scipy import stats as s
 
-def Oneday_summary_L3_ST_function():
+def Oneday_summary_L3_ST_function(pathname):
     #################################################################################################
     #Get time now. This helps to compute total elapsed time for running the code.
     #################################################################################################
@@ -38,7 +38,7 @@ def Oneday_summary_L3_ST_function():
     DOY = []
 
     #Assign the file path for saving the result
-    thePath = r'E:\Internship\Final\Asa\L1\Filter\2019'
+    thePath = pathname2
 
     #Initializing the empty dictionary to save the DOY as Key and GCC values from valid images
     GCCdict1day = {}
@@ -53,7 +53,7 @@ def Oneday_summary_L3_ST_function():
     #################################################################################################
 
     #Random selection of one image from the image folder to show the extent of ROI
-    imgDir = thePath + '\\' + random.choice(os.listdir(thePath))
+    imgDir = thePath + '/' + random.choice(os.listdir(thePath))
 
     #Extract image name, station name, year
     imName = os.path.basename(imgDir)
@@ -92,7 +92,7 @@ def Oneday_summary_L3_ST_function():
     #################################################################################################
     #Assigning path to create text file 
     #################################################################################################        
-    pathVI = os.path.join(thePath + r'\CSV\VI_allImage.txt')
+    pathVI = os.path.join(thePath + /CSV/VI_allImage.txt)
 
     #Headers to be appended to the text file
     heading = "Image DOY Red_ROI1 Green_ROI1 Blue_ROI1 Snow GCC_ROI1 RCC_ROI1"
@@ -129,8 +129,12 @@ def Oneday_summary_L3_ST_function():
         imgName = os.path.basename(img)
         
         #Day of Year information (DOY) extraction from image file name
-        dayOfYear = imgName.split('_')[2]
-        DOY.append(dayOfYear)
+        #changed from imgName.split('_')[2]
+        dayOfYear = imgName.split('_')[1]
+        dayOfYear2 = dayOfYear.split('.')[0]
+        dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
+        dayOfYear4 = int(dayOfYear3.split('T')[0])
+        DOY.append(dayOfYear4)
         
         #Apply the mask and extract the image data within mask only
         masked = cv2.bitwise_and(cv_img, mask)
@@ -173,20 +177,20 @@ def Oneday_summary_L3_ST_function():
         
         #Update dictionary with DOY and its associated multiple vegetation indices values
         if dayOfYear in GCCdict1day:
-            GCCdict1day[dayOfYear].append(g)
-            RCCdict1day[dayOfYear].append(r)
-            Reddict1day[dayOfYear].append(Rm)
-            Grndict1day[dayOfYear].append(Gm)
-            Bludict1day[dayOfYear].append(Bm)
-            SnowdictTag[dayOfYear].append(snow)
+            GCCdict1day[dayOfYear4].append(g)
+            RCCdict1day[dayOfYear4].append(r)
+            Reddict1day[dayOfYear4].append(Rm)
+            Grndict1day[dayOfYear4].append(Gm)
+            Bludict1day[dayOfYear4].append(Bm)
+            SnowdictTag[dayOfYear4].append(snow)
             
         else:
-            GCCdict1day[dayOfYear] = [g]
-            RCCdict1day[dayOfYear] = [r]
-            Reddict1day[dayOfYear] = [Rm]
-            Grndict1day[dayOfYear] = [Gm]
-            Bludict1day[dayOfYear] = [Bm]
-            SnowdictTag[dayOfYear] = [snow]
+            GCCdict1day[dayOfYear4] = [g]
+            RCCdict1day[dayOfYear4] = [r]
+            Reddict1day[dayOfYear4] = [Rm]
+            Grndict1day[dayOfYear4] = [Gm]
+            Bludict1day[dayOfYear4] = [Bm]
+            SnowdictTag[dayOfYear4] = [snow]
         
     #################################################################################################
     #Close the file when done 

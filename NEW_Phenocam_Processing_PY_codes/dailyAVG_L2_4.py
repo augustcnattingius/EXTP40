@@ -62,21 +62,18 @@ def dailyAVG_L2_function(pathname):
         imgName = os.path.basename(img)
         
         #Day of Year information (DOY) extraction from image file name
-        #
-        dayOfYear = (imgName.split('_')[2])
-        print(dayOfYear)
-        dayOfYear2 = dayOfYear.split('.')[0]
-        dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
-        dayOfYear4 = int(dayOfYear3.split('T')[0]
+        #changed from dayofYear = imgName.split('_')[2])
+        dayOfYear = imgName.split('_')[2]
         #Check if current DOY is in the list
-        if dayOfYear4 not in doy:
+        
+        if dayOfYear not in doy:
            
             #Append the day of year in empty list DOY
-            doy.append(dayOfYear4)
+            doy.append(dayOfYear)
             
             #Make a new folder in the given path with the 'doy' as folder name
             thePath = baseDst
-            folders = [str(dayOfYear4)]
+            folders = [str(dayOfYear)]
             
             #Iterating the folders list to create each DOY as a new folder in given path
             for folder in folders:
@@ -87,7 +84,7 @@ def dailyAVG_L2_function(pathname):
                     pass
             
             #Copy the image from the source to destination folder
-            imgDst = baseDst + '\\' + folders[0]
+            imgDst = baseDst + '/' + folders[0]
             #shutil.copy(img, imgDst)
         
         #If DOY exists in the doy list, copy the source image to the same folder
@@ -106,11 +103,11 @@ def dailyAVG_L2_function(pathname):
     #Line of codes to compute daily average from all valid images and save it as a .jpg file
 
     #Save average image
-    imgSave = imgSrc + '\RGB'
+    imgSave = imgSrc + '/RGB'
         
     for subdir in os.listdir(baseDst): 
         
-        imgDir = baseDst + '\\' + subdir
+        imgDir = baseDst + '/' + subdir
 
         #Read all files in a directory as a numpy array
         #cv2.cvtColor for converting image from BGR to RGB
@@ -128,7 +125,7 @@ def dailyAVG_L2_function(pathname):
         im = Image.fromarray(intImage)
         
         #Define path for saving image with given file name 
-        saveDst = imgSave + '\\' + "_".join(os.listdir(imgDir)[0].split("_")[:3]) + '_RGB_L2_daily.jpg'
+        saveDst = imgSave + '/' + "_".join(os.listdir(imgDir)[0].split("_")[:3]) + '_RGB_L2_daily.jpg'
         
         #Save image in the defined path
         im.save(saveDst)
@@ -153,8 +150,8 @@ def dailyAVG_L2_function(pathname):
     #Line of code to generate daily GCC and RCC as an image
 
     #Save daily GCC and RCC image
-    gccSave = imgSrc + '\GCC'
-    rccSave = imgSrc + '\RCC'
+    gccSave = imgSrc + '/GCC'
+    rccSave = imgSrc + '/RCC'
 
     #Iterating all daily average images to compute GCC and RCC on a pixel by pixel basis
     for img in sorted(glob.glob(os.path.join(imgSave, '*.jpg'))):
@@ -186,8 +183,8 @@ def dailyAVG_L2_function(pathname):
         intImage2 = (arr2 * 255).astype(np.uint8) 
         
         #Define path for saving image with given file name 
-        saveDst1 = gccSave + '\\' + imgName.replace('RGB','GCC')
-        saveDst2 = rccSave + '\\' + imgName.replace('RGB','RCC')
+        saveDst1 = gccSave + '/' + imgName.replace('RGB','GCC')
+        saveDst2 = rccSave + '/' + imgName.replace('RGB','RCC')
         
         #Save in the defined path as a Greyscale image
         cv2.imwrite(saveDst1, intImage1)  
