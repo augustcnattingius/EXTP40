@@ -25,22 +25,23 @@ def main():
     #Enter the pathname of where the images are stored
     pathname = input("Enter pathname of where the images are stored:") 
 
-    #changed to renaming typ Röbäcksdalen
+    #changed to renaming typ Röbäcksdalen DONE
+    '''
     if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         imgRename_function(pathname)
 
-    # removeDark path to Dark folder was changed for it to work for me, added counter to how many images were removed
+    # removeDark path to Dark folder was changed for it to work for me, added counter to how many images were removed DONE
     if input("Do You Want To Continue with Removing Dark images? [y/n]") == "y":
         removeDark_function(pathname)
 
-    #path to 10TO14 was changed for it to work for me, added counter, images are filtered in a new folder, but not removed from the original file.
+    #path to 10TO14 was changed for it to work for me, added counter, images are filtered in a new folder, but not removed from the original file. DONE MAYBE?
     if input("Do You Want To Continue with timeFilter? [y/n]") == "y":
         timeFilter_function(pathname)
 
-    #path to Temp and other folder was changed for it to work for me.
+    #path to Temp and other folder was changed for it to work for me. DONE MAYBE?
     if input("Do You Want To Continue with Removing Calculating daily averages? [y/n]") == "y":
         dailyAVG_L2_function(pathname)
-
+    '''
     #changed path, TypeError line 67 changed cv2.fillPoly, added counter,  seems like all pictures are removed and placed in snowy?
     if input("Do You Want To Continue with Removing snow? [y/n]") == "y":
         snowThreshold_function(pathname)

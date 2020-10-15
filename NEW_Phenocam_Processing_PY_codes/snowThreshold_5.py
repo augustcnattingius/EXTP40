@@ -10,7 +10,7 @@ All thresholds are user defined.
 #################################################################################################
 #Module Declaration
 #################################################################################################
-
+import sys
 import glob
 import os
 import shutil
@@ -44,28 +44,31 @@ def snowThreshold_function(pathname):
     #Defining the path for saving filtered images
     #Always change the base path i.e. 'E:\Internship\snowTest\'
     dest = thePath + '/Snowy'
-
+    imgDir = None
     #################################################################################################
     #Display Region of Interest (ROI) selection in the image  
     #################################################################################################
 
     #Random selection of one image from the image folder to show the extent of ROI
-    imgDir = thePath + '/' + random.choice(os.listdir(thePath))
+    while imgDir == None:
+        imgDir = thePath + '/' + random.choice(os.listdir(thePath))
 
     #Loading image from the specified file
     img = cv2.imread(imgDir)
-
+    print (img)
     #ROI definition for the image
     pts1 = np.array([[100, 1400], [100, 250], [2500, 250], [2500, 1400]]) 
     cv2.polylines(img, np.int32([pts1]), 1, (0, 0, 255), 10)
 
     #Create a mask with 0 as background having same size like that of original image
     mask = np.zeros_like(img)
-
     #Fill the polygon with white colour where we want to apply the mask
 
     #changed from cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
-    cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+    try:
+        cv2.fillPoly(mask, np.int32([pts1]), (255,255,255))
+    except:
+        pass
 
     #cv2.fillPoly(mask, np.array([pts1], 'int32'), (255,255,255))
 
@@ -91,16 +94,16 @@ def snowThreshold_function(pathname):
     #Iterating through all the images to calculate total DN within given ROI
     counter = 0
     for img in sorted(glob.glob(os.path.join(thePath, '*.jpg'))):
+        
     
         #Reading image one by one
         cv_img = cv2.imread(img)
         
         #Extracting image file name
         imgName = os.path.basename(img)
-        print (imgName)
         #Day of Year information (DOY) extraction from image file name
-        dayOfYear = imgName.split('_')[2]
-
+        dayOfYear = imgName.split('_')
+        dayOfYear = dayOfYear[1]
         '''
         dayOfYear = imgName.split('_')[1]
         dayOfYear2 = dayOfYear.split('.')[0]
@@ -109,7 +112,6 @@ def snowThreshold_function(pathname):
         '''
 
         DOY.append(dayOfYear)
-        
         #Apply the mask and extract the image data within mask only
         masked = cv2.bitwise_and(cv_img, mask)
         
@@ -120,7 +122,7 @@ def snowThreshold_function(pathname):
         Rm = np.mean(np.ma.masked_equal(R, 0))
         Gm = np.mean(np.ma.masked_equal(G, 0))
         Bm = np.mean(np.ma.masked_equal(B, 0))
-        
+        print(imgName, "rm:",Rm,"gm:",Gm,"bm:",Bm)
         #Appending these values to respective lists storing them
         meanRDN.append(Rm)
         meanBDN.append(Bm)
@@ -147,7 +149,8 @@ def snowThreshold_function(pathname):
     plt.xlabel('Day of Year (DOY)', fontsize = 20)
     plt.ylabel('Mean Digital Number (DN)', fontsize = 20)
     plt.legend(loc = 'best', fontsize = 18)
-
+    #uncomment to show plot
+    #plt.show()
     #################################################################################################
     #Find out the total elapsed time and print out on the screen
     #################################################################################################
