@@ -44,6 +44,7 @@ def dailyAVG_L2_function(pathname):
     for folder in folders:
         try:
             os.mkdir(os.path.join(imgSrc, folder))
+            print("folder created:", folder)
         except:
             pass
 
@@ -85,7 +86,7 @@ def dailyAVG_L2_function(pathname):
             
             #Copy the image from the source to destination folder
             imgDst = baseDst + '/' + folders[0]
-            #shutil.copy(img, imgDst)
+            shutil.copy(img, imgDst)
         
         #If DOY exists in the doy list, copy the source image to the same folder
         shutil.copy(img, imgDst)
@@ -112,7 +113,7 @@ def dailyAVG_L2_function(pathname):
         #Read all files in a directory as a numpy array
         #cv2.cvtColor for converting image from BGR to RGB
         images = [cv2.cvtColor(cv2.imread(file), cv2.COLOR_BGR2RGB) for file in glob.glob(os.path.join(imgDir, '*.jpg'))]
-        print (images)
+        
         #call the 3.5 here? Don't forget to make sure the files are in float because we need float to have nan
 
         #Compute element wise daily average
