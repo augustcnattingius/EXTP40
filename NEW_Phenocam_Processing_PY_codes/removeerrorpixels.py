@@ -10,9 +10,7 @@ from cv2 import cv2
 #img = Image.open(os.path.join(script_dir,"pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"))
 #img = cv2.imread(os.path.join(script_dir,"pictures/Asa/SWE-ASA-NYB-FOR-P01_20170107_007_1400.jpg"), 1)
 
-
 class removalofPixels(object):
-
   def _init_(self, img):
     self.img = img
 
@@ -28,7 +26,6 @@ class removalofPixels(object):
     w = width - 1
     h = height - 1
     rowCount = 0
-    colCount = 0
 
     while bigWhile is True and rowCount <= h: #if we know there are errors => start changing
       firstPix = im[h-rowCount, w]
@@ -45,7 +42,6 @@ class removalofPixels(object):
       if error is True:
         im[(h-rowCount), :] = np.nan #tried with only np.nan with no difference
   
-      colCount = 0
       rowCount = rowCount + 1
 
     self.img = im
