@@ -38,7 +38,7 @@ def Oneday_summary_L3_ST_function(pathname):
     DOY = []
 
     #Assign the file path for saving the result
-    thePath = pathname2
+    thePath = pathname
 
     #Initializing the empty dictionary to save the DOY as Key and GCC values from valid images
     GCCdict1day = {}
@@ -57,6 +57,9 @@ def Oneday_summary_L3_ST_function(pathname):
 
     #Extract image name, station name, year
     imName = os.path.basename(imgDir)
+
+    print(imName)
+    
     stnName = imName.split('_')[0]
     yyyy = imName.split('_')[1][0:4]
 
@@ -92,7 +95,7 @@ def Oneday_summary_L3_ST_function(pathname):
     #################################################################################################
     #Assigning path to create text file 
     #################################################################################################        
-    pathVI = os.path.join(thePath + /CSV/VI_allImage.txt)
+    pathVI = os.path.join(thePath + r'\CSV\VI_allImage.txt')
 
     #Headers to be appended to the text file
     heading = "Image DOY Red_ROI1 Green_ROI1 Blue_ROI1 Snow GCC_ROI1 RCC_ROI1"
@@ -130,11 +133,13 @@ def Oneday_summary_L3_ST_function(pathname):
         
         #Day of Year information (DOY) extraction from image file name
         #changed from imgName.split('_')[2]
-        dayOfYear = imgName.split('_')[1]
+        dayOfYear = imgName.split('_')[2]
+        '''
         dayOfYear2 = dayOfYear.split('.')[0]
         dayOfYear3 = dayOfYear2.split('-')[0] + dayOfYear2.split('-')[1] + dayOfYear2.split('-')[2]
         dayOfYear4 = int(dayOfYear3.split('T')[0])
-        DOY.append(dayOfYear4)
+        '''
+        DOY.append(dayOfYear)
         
         #Apply the mask and extract the image data within mask only
         masked = cv2.bitwise_and(cv_img, mask)
@@ -146,6 +151,7 @@ def Oneday_summary_L3_ST_function(pathname):
         Rm = np.mean(np.ma.masked_equal(R, 0))
         Gm = np.mean(np.ma.masked_equal(G, 0))
         Bm = np.mean(np.ma.masked_equal(B, 0))
+        print(Bm)
 
         #Total mean DN of ROI 
         TotalDN_ROI = Rm + Gm + Bm
@@ -177,20 +183,20 @@ def Oneday_summary_L3_ST_function(pathname):
         
         #Update dictionary with DOY and its associated multiple vegetation indices values
         if dayOfYear in GCCdict1day:
-            GCCdict1day[dayOfYear4].append(g)
-            RCCdict1day[dayOfYear4].append(r)
-            Reddict1day[dayOfYear4].append(Rm)
-            Grndict1day[dayOfYear4].append(Gm)
-            Bludict1day[dayOfYear4].append(Bm)
-            SnowdictTag[dayOfYear4].append(snow)
+            GCCdict1day[dayOfYear].append(g)
+            RCCdict1day[dayOfYear].append(r)
+            Reddict1day[dayOfYear].append(Rm)
+            Grndict1day[dayOfYear].append(Gm)
+            Bludict1day[dayOfYear].append(Bm)
+            SnowdictTag[dayOfYear].append(snow)
             
         else:
-            GCCdict1day[dayOfYear4] = [g]
-            RCCdict1day[dayOfYear4] = [r]
-            Reddict1day[dayOfYear4] = [Rm]
-            Grndict1day[dayOfYear4] = [Gm]
-            Bludict1day[dayOfYear4] = [Bm]
-            SnowdictTag[dayOfYear4] = [snow]
+            GCCdict1day[dayOfYear] = [g]
+            RCCdict1day[dayOfYear] = [r]
+            Reddict1day[dayOfYear] = [Rm]
+            Grndict1day[dayOfYear] = [Gm]
+            Bludict1day[dayOfYear] = [Bm]
+            SnowdictTag[dayOfYear] = [snow]
         
     #################################################################################################
     #Close the file when done 
