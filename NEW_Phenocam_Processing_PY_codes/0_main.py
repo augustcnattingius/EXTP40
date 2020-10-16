@@ -3,7 +3,7 @@ from removeDark_2 import removeDark_function
 from timeFilter_3 import timeFilter_function
 from dailyAVG_L2_4 import dailyAVG_L2_function
 from snowThreshold_5 import snowThreshold_function
-#from Oneday_summary_L3_ST_6 import Oneday_summary_L3_ST_function
+from Oneday_summary_L3_ST_6 import Oneday_summary_L3_ST_function
 from mergeAnnualCSV_7 import mergeAnnualCSV_function
 #from mergeROIcsv import mergeROIcsv_function
 
@@ -20,10 +20,10 @@ def main():
     #made the individual classes into functions so that they could be called from this main-fuction.
     #In order to import the functions I had to renamame the classes since they could not start with a number.
     
-
+    
     #Enter the pathname of where the images are stored
     pathname = input("Enter pathname of where the images are stored:") 
-
+    '''
     #changed to renaming typ Röbäcksdalen DONE
     if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         imgRename_function(pathname)
@@ -45,8 +45,8 @@ def main():
     '''
     #changed pathname and doy, not working atm,
     if input("Do You Want To Continue with Creating a 1-day summary? [y/n]") == "y":
-        pathname2 = input("Enter pathname of where you would like to store the results of the one day summary:") 
-        Oneday_summary_L3_ST_function(pathname2)
+        pathname = input("Enter pathname of where you would like to store the results of the one day summary:") 
+        Oneday_summary_L3_ST_function(pathname)
 
     #oneayday summary must work for this one to be able to work
     if input("Do You Want To Continue with merging Annual CSV? [y/n]") == "y":
@@ -56,6 +56,6 @@ def main():
     #oneayday summary must work for this one to be able to work
     if input("Do You Want To Continue with merging ROIcsv? [y/n]") == "y":
         mergeROIcsv_function
-    '''   
+       
 if __name__ == '__main__':
     main()
