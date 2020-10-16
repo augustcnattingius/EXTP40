@@ -18,7 +18,7 @@ from cv2 import cv2
 import numpy as np
 from datetime import datetime
 from PIL import Image
-from removeerrorpixels as erFix
+import removeerrorpixels as erFix
 
 def dailyAVG_L2_function(pathname):
     #################################################################################################
