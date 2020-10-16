@@ -28,7 +28,7 @@ def timeFilter_function(pathname):
     imgSrc = pathname
     #Automatically creating folders in the directory to store filtered images
     #Try-except block is to pass overwrite directories if exists
-    folders = ['10TO14']
+    folders = ['OutofTime']
     for folder in folders:
         try:
             os.mkdir(os.path.join(imgSrc, folder))
@@ -36,7 +36,7 @@ def timeFilter_function(pathname):
             pass
 
     #Path definition for saving filtered images 
-    dest = imgSrc + '/10TO14'
+    dest = imgSrc + '/OutofTime'
 
     #################################################################################################
     #Filter out PhenoCam images within user defined time frame
@@ -54,12 +54,12 @@ def timeFilter_function(pathname):
         
         #TimeStamp information extraction from file name
         hour = int(ymdt.split('.')[0][0:2])
-
+        print (hour)
         #Condition to check the time of image acquisition for a given image
-        if (hour >= 10) and (hour <= 14):
+        if (hour > 14) or (hour < 10):
             counter = counter + 1
-            #Copy the images to destination folder
-            shutil.copy(img, dest)
+            #mMove the images to destination folder
+            shutil.move(img, dest)
 
     #################################################################################################
             

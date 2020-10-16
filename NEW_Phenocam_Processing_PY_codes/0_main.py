@@ -33,19 +33,19 @@ def main():
     # removeDark path to Dark folder was changed for it to work for me, added counter to how many images were removed DONE
     if input("Do You Want To Continue with Removing Dark images? [y/n]") == "y":
         removeDark_function(pathname)
-
+    '''
     #path to 10TO14 was changed for it to work for me, added counter, images are filtered in a new folder, but not removed from the original file. DONE MAYBE?
     if input("Do You Want To Continue with timeFilter? [y/n]") == "y":
         timeFilter_function(pathname)
-
+'''
     #path to Temp and other folder was changed for it to work for me. DONE MAYBE?
     if input("Do You Want To Continue with Removing Calculating daily averages? [y/n]") == "y":
         dailyAVG_L2_function(pathname)
-    '''
+    
     #changed path, TypeError line 67 changed cv2.fillPoly, added counter,  seems like all pictures are removed and placed in snowy?
     if input("Do You Want To Continue with Removing snow? [y/n]") == "y":
         snowThreshold_function(pathname)
-    '''
+    
     #changed pathname and doy, not working atm,
     if input("Do You Want To Continue with Creating a 1-day summary? [y/n]") == "y":
         pathname2 = input("Enter pathname of where you would like to store the results of the one day summary:") 
