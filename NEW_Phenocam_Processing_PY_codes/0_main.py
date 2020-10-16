@@ -19,14 +19,12 @@ def main():
 
     #made the individual classes into functions so that they could be called from this main-fuction.
     #In order to import the functions I had to renamame the classes since they could not start with a number.
-    #keep in mind: start with raw data.
     
 
     #Enter the pathname of where the images are stored
     pathname = input("Enter pathname of where the images are stored:") 
 
     #changed to renaming typ Röbäcksdalen DONE
-    '''
     if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         imgRename_function(pathname)
 
@@ -41,8 +39,7 @@ def main():
     #path to Temp and other folder was changed for it to work for me. DONE MAYBE?
     if input("Do You Want To Continue with Removing Calculating daily averages? [y/n]") == "y":
         dailyAVG_L2_function(pathname)
-    '''
-    #changed path, TypeError line 67 changed cv2.fillPoly, added counter,  seems like all pictures are removed and placed in snowy?
+    #changed path, TypeError line 67 changed cv2.fillPoly, added counter, all pictures are removed and placed in snowy?
     if input("Do You Want To Continue with Removing snow? [y/n]") == "y":
         snowThreshold_function(pathname)
     '''
