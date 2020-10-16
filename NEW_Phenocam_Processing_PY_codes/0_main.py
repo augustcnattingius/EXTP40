@@ -5,7 +5,7 @@ from dailyAVG_L2_4 import dailyAVG_L2_function
 from snowThreshold_5 import snowThreshold_function
 #from Oneday_summary_L3_ST_6 import Oneday_summary_L3_ST_function
 from mergeAnnualCSV_7 import mergeAnnualCSV_function
-#from mergeROIcsv import mergeROIcsv_function
+from mergeROIcsv_8 import mergeROIcsv_function
 
 def main():
 
@@ -23,7 +23,7 @@ def main():
 
     #Enter the pathname of where the images are stored
     pathname = input("Enter pathname of where the images are stored:") 
-
+    '''
     #changed to renaming typ Röbäcksdalen DONE
     if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         imgRename_function(pathname)
@@ -31,15 +31,15 @@ def main():
     # removeDark path to Dark folder was changed for it to work for me, added counter to how many images were removed DONE
     if input("Do You Want To Continue with Removing Dark images? [y/n]") == "y":
         removeDark_function(pathname)
-    '''
-    #path to 10TO14 was changed for it to work for me, added counter, images are filtered in a new folder, but not removed from the original file. DONE MAYBE?
+    
+    #path to 10TO14 was changed for it to work for me, added counter, images are filtered in a new folder, but not removed from the original file. DONE
     if input("Do You Want To Continue with timeFilter? [y/n]") == "y":
         timeFilter_function(pathname)
-'''
+    '''
     #path to Temp and other folder was changed for it to work for me. DONE MAYBE?
     if input("Do You Want To Continue with Removing Calculating daily averages? [y/n]") == "y":
         dailyAVG_L2_function(pathname)
-    
+    '''
     #changed path, TypeError line 67 changed cv2.fillPoly, added counter,  seems like all pictures are removed and placed in snowy?
     if input("Do You Want To Continue with Removing snow? [y/n]") == "y":
         snowThreshold_function(pathname)
@@ -57,6 +57,6 @@ def main():
     #oneayday summary must work for this one to be able to work
     if input("Do You Want To Continue with merging ROIcsv? [y/n]") == "y":
         mergeROIcsv_function
-      
+    '''
 if __name__ == '__main__':
     main()
