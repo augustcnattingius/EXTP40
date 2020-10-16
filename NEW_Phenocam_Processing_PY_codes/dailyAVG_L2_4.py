@@ -18,6 +18,7 @@ from cv2 import cv2
 import numpy as np
 from datetime import datetime
 from PIL import Image
+from removeerrorpixels as erFix
 
 def dailyAVG_L2_function(pathname):
     #################################################################################################
@@ -114,7 +115,11 @@ def dailyAVG_L2_function(pathname):
         #cv2.cvtColor for converting image from BGR to RGB
         images = [cv2.cvtColor(cv2.imread(file), cv2.COLOR_BGR2RGB) for file in glob.glob(os.path.join(imgDir, '*.jpg'))]
         
-        #call the 3.5 here? Don't forget to make sure the files are in float because we need float to have nan
+        #Been added from the EXTP40-group 2020
+        ###############################################
+        #for i in images:
+        #    images[i] = erFix.removalofPixels(images[i])
+        ###############################################
 
         #Compute element wise daily average
         avgImg = np.nanmean(images, axis = 0)
