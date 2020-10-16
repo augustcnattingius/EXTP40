@@ -19,14 +19,12 @@ def main():
 
     #made the individual classes into functions so that they could be called from this main-fuction.
     #In order to import the functions I had to renamame the classes since they could not start with a number.
-    #keep in mind: start with raw data.
     
 
     #Enter the pathname of where the images are stored
     pathname = input("Enter pathname of where the images are stored:") 
 
     #changed to renaming typ Röbäcksdalen DONE
-    '''
     if input("Do You Want To Continue with Renaming the images? [y/n]") == "y":
         imgRename_function(pathname)
 
@@ -59,6 +57,6 @@ def main():
     #oneayday summary must work for this one to be able to work
     if input("Do You Want To Continue with merging ROIcsv? [y/n]") == "y":
         mergeROIcsv_function
-    '''   
+      
 if __name__ == '__main__':
     main()
