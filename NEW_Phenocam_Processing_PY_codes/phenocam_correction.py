@@ -1,38 +1,48 @@
 # coding=utf-8
-########################################################################################
-# Author: Ujash Joshi, University of Toronto, 2017                                     #
-# Based on Octave implementation by: Benjamin Eltzner, 2014 <b.eltzner@gmx.de>         #
-# Octave/Matlab normxcorr2 implementation in python 3.5                                #
-# Details:                                                                             #
-# Normalized cross-correlation. Similiar results upto 3 significant digits.            #
-# https://github.com/Sabrewarrior/normxcorr2-python/master/norxcorr2.py                #
-# http://lordsabre.blogspot.ca/2017/09/matlab-normxcorr2-implemented-in-python.html    #
-########################################################################################
+
 
 
 import numpy as np
 from scipy.signal import fftconvolve
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 from cv2 import cv2
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 def main():
-    template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes/pictures//trunk_matching_part.jpg"))
-    image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes/pictures//2012-07-10-1100.jpg"))
+    
+    #Loading image
+    template = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen_matching3.jpg"))
+    image = np.asarray(Image.open("NEW_Phenocam_Processing_PY_codes\pictures\Röbäcksdalen\SWE-RBD-RBD-AGR-P02_2019-04-17T1330.jpg"))
+    
+    #Cheching variables
     print ("temp:",np.ndim(template), template.shape,"image:",np.ndim(image), image.shape)
     temp_shape = [s for s in template.shape]
     temp_shape.pop(2)
+    
+    #Calculating cross-correlation
     c = normxcorr2(template,image)
+    
+    #Calculating max value and its index
     absC = np.absolute(c)
     imax = np.argmax(absC)
     c_max = np.amax(absC)
+    
+    #Extracting the shape of the correlation matrix
     shape = [c for c in c.shape]
     shape.pop(2)
+    
+    #Calculating linear indices to subscripts
     peak = ind2sub(shape, imax)
+    
+    #subscripts is the offset
     corr_offset = [peak[1], peak[0]]
     x1 = corr_offset[0]
     y1 = corr_offset[1]
+
+    #Checking variables
     print ("shape c:",shape,"xy:", (x1,y1), "shape matching:",temp_shape, "peak:",peak, "imax:",imax, "c_max:", c_max)
     display(image, (x1,y1), temp_shape)
 
@@ -51,7 +61,15 @@ def normxcorr2(template, image, mode="valid"):
     same: The output is the same size as image, centered with respect to the ‘full’ output.
     :return: N-D array of same dimensions as image. Size depends on mode parameter.
     """
-
+    ########################################################################################
+    # Author: Ujash Joshi, University of Toronto, 2017                                     #
+    # Based on Octave implementation by: Benjamin Eltzner, 2014 <b.eltzner@gmx.de>         #
+    # Octave/Matlab normxcorr2 implementation in python 3.5                                #
+    # Details:                                                                             #
+    # Normalized cross-correlation. Similiar results upto 3 significant digits.            #
+    # https://github.com/Sabrewarrior/normxcorr2-python/master/norxcorr2.py                #
+    # http://lordsabre.blogspot.ca/2017/09/matlab-normxcorr2-implemented-in-python.html    #
+    ########################################################################################
     # If this happens, it is probably a mistake
     if np.ndim(template) > np.ndim(image) or \
             len([i for i in range(np.ndim(template)) if template.shape[i] > image.shape[i]]) > 0:
@@ -84,6 +102,7 @@ def ind2sub(array_shape, ind):
     rows = (ind.astype("int32") // array_shape[1])
     cols = (ind.astype("int32") % array_shape[1])
     return (rows, cols)
+
 def display(image, position, size):
     im = np.array(image, dtype=np.uint8)
 
