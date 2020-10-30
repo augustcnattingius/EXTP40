@@ -15,7 +15,7 @@ class removalofPixels(object):
     self.img = img
 
   def pixelRemoval(self, img):
-    im = img.astype(float) #needs to be in float to have nan
+    im = img.astype(float) #needs to be in float to have NaN
 
     checkCount = 0
     extraCheck = 10
@@ -40,7 +40,7 @@ class removalofPixels(object):
 
       #If there are errors => replace that whole row with np.nan
       if error is True:
-        im[(h-rowCount), :] = np.nan #tried with only np.nan with no difference
+        im[(h-rowCount), :] = np.nan 
   
       rowCount = rowCount + 1
 

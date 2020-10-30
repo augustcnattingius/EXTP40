@@ -122,7 +122,7 @@ def dailyAVG_L2_function(pathname):
         ###############################################
 
         #Compute element wise daily average
-        avgImg = np.nanmean(images, axis = 0)
+        avgImg = np.nanmean(images, axis = 0) #changed mean => nanmean
         
         #Converting float64 type ndarray to uint8
         intImage = np.around(avgImg).astype(np.uint8) #Round first and then convert to integer
